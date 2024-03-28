@@ -16,17 +16,20 @@ if (quesPin.pin === myPin) {
   let atmOperations = await inquirer.prompt({
     name: "operation",
     type: "list",
-    choices: ["fast cash", "withdraw", "check balance"],
+    choices: [
+      chalk.yellow("fast cash"),
+      chalk.blue("withdraw"),
+      chalk.green("check balance"),
+    ],
   });
 
-   if (atmOperations.operation === "fast cash") {
-   }
-   if (atmOperations.operation === "withdraw") {
-   }
-   if (atmOperations.operation === "check balance") {
-   }
-
-
+  if (atmOperations.operation === "fast cash") {
+    console.log(`fast cash selected`);
+  } else if (atmOperations.operation === "withdraw") {
+    console.log(`withdraw selected`);
+  } else if (atmOperations.operation === "check balance") {
+    console.log(chalk.green(`Your Balance is ${myBalance}`));
+  }
 } else {
   console.log(chalk.red("Sorry your pin was not correct"));
 }
