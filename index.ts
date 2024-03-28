@@ -23,12 +23,12 @@ if (quesPin.pin === myPin) {
     ],
   });
 
-  if (atmOperations.operation === "fast cash") {
+  if (atmOperations.operation === chalk.yellow("fast cash")) {
     console.log(`fast cash selected`);
-  } else if (atmOperations.operation === "withdraw") {
+  } else if (atmOperations.operation === chalk.blue("withdraw")) {
     console.log(`withdraw selected`);
-  } else if (atmOperations.operation === "check balance") {
-    console.log(chalk.green(`Your Balance is ${myBalance}`));
+  } else if (atmOperations.operation === chalk.green("check balance")) {
+    console.log(`Your Balance is ${myBalance}`);
   }
 } else {
   console.log(chalk.red("Sorry your pin was not correct"));
