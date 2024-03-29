@@ -49,8 +49,13 @@ if (quesPin.pin === myPin) {
             type: "number",
             message: "Enter your amount",
         });
-        myBalance -= withdrawCash.takeout;
-        console.log(`Your Remaining Balance is ${myBalance}`);
+        if (withdrawCash.takeout > myBalance) {
+            console.log(chalk.red("Sorry ! insufficient balance"));
+        }
+        else {
+            myBalance -= withdrawCash.takeout;
+            console.log(`Your Remaining Balance is ${myBalance}`);
+        }
     }
     else if (atmOperations.operation === chalk.green("check balance")) {
         console.log(`Your Remaining Balance is ${myBalance}`);
