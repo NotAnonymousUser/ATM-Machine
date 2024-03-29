@@ -3,6 +3,7 @@ import chalk from "chalk";
 
 let myBalance = 100000;
 let myPin = 123;
+const accountLimit = 10000000;
 
 let quesPin = await inquirer.prompt({
   name: "pin",
@@ -17,13 +18,15 @@ if (quesPin.pin === myPin) {
     name: "operation",
     type: "list",
     choices: [
-      chalk.yellow("fast cash"),
-      chalk.blue("withdraw"),
-      chalk.green("check balance"),
+      "fast cash",
+      "withdraw",
+      "deposit",
+      "balance inquiry",
+      "PIN change",
     ],
   });
 
-  if (atmOperations.operation === chalk.yellow("fast cash")) {
+  if (atmOperations.operation === "fast cash") {
     console.log(`fast cash selected`);
 
     let fastCash = await inquirer.prompt({
@@ -45,20 +48,44 @@ if (quesPin.pin === myPin) {
       myBalance -= 50000;
     }
     console.log(`Your Remaining Balance is ${myBalance}`);
-  } else if (atmOperations.operation === chalk.blue("withdraw")) {
+  } else if (atmOperations.operation === "withdraw") {
     let withdrawCash = await inquirer.prompt({
-      name: "takeout",
+      name: "cashout",
       type: "number",
       message: "Enter your amount",
     });
-    if (withdrawCash.takeout > myBalance) {
+    if (withdrawCash.cashout > myBalance) {
       console.log(chalk.red("Sorry ! insufficient balance"));
     } else {
-      myBalance -= withdrawCash.takeout;
+      myBalance -= withdrawCash.cashout;
       console.log(`Your Remaining Balance is ${myBalance}`);
     }
-  } else if (atmOperations.operation === chalk.green("check balance")) {
+  } else if (atmOperations.operation === "deposit") {
+    let depositCash = await inquirer.prompt({
+      name: "cashin",
+      type: "number",
+      message: "Enter your amount",
+    });
+
+    myBalance += depositCash.cashin;
+    if (myBalance > accountLimit) {
+      console.log(
+        chalk.red(
+          `your account limit is ${accountLimit}. kindly contact the bank manager to upgrade your limit.`
+        )
+      );
+    }
     console.log(`Your Remaining Balance is ${myBalance}`);
+  } else if (atmOperations.operation === "balance inquiry") {
+    console.log(`Your Remaining Balance is ${myBalance}`);
+  } else if (atmOperations.operation === "PIN change") {
+    let changePin = await inquirer.prompt({
+      name: "change",
+      type: "number",
+      message: "Type your new password",
+    });
+    let myPin = changePin.change;
+    console.log(`Your new pin is ${myPin}`);
   }
 } else {
   console.log(chalk.red("Sorry your pin was not correct"));
