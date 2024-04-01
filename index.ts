@@ -10,11 +10,11 @@ const accountLimit = 10000000;
 let quesPin = await inquirer.prompt({
   name: "pin",
   type: "number",
-  message: chalk.blue("enter you pin"),
+  message: chalk.blue("Enter you pin"),
 });
 
 if (quesPin.pin === myPin) {
-  console.log(chalk.green("your pin was correct"));
+  console.log(chalk.green("Account access GRANTED !"));
 
   let atmOperations = await inquirer.prompt({
     name: "operation",
@@ -69,15 +69,16 @@ if (quesPin.pin === myPin) {
       message: "Enter your amount",
     });
 
-    myBalance += depositCash.cashin;
-    if (myBalance > accountLimit) {
+    if (depositCash.cashin > accountLimit) {
       console.log(
         chalk.red(
-          `your account limit is ${accountLimit}. kindly contact the bank manager to upgrade your limit.`
+          `Cant add ${depositCash.cashin} amount to your account because your account is exceeding the max limit i.e ${accountLimit}.\nkindly contact the bank manager to upgrade your limit.`
         )
       );
+    } else {
+      myBalance += depositCash.cashin;
+      console.log(`Your Remaining Balance is ${myBalance}`);
     }
-    console.log(`Your Remaining Balance is ${myBalance}`);
   } else if (atmOperations.operation === "balance inquiry") {
     console.log(`Your Remaining Balance is ${myBalance}`);
   } else if (atmOperations.operation === "PIN change") {
