@@ -2,8 +2,10 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
 let myBalance = 100000;
-let myPin = 123;
+let myPin = 13579;
 const accountLimit = 10000000;
+console.log("Welcome to ATM Simulator");
+console.log("Use code 13579 to get access");
 let quesPin = await inquirer.prompt({
     name: "pin",
     type: "number",
