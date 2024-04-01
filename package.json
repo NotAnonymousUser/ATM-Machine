@@ -1,6 +1,6 @@
 {
   "name": "@muhammad-mubeen-javed/atm-machine",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "this is a program that works like an ATM machine.",
   "main": "index.js",
   "type": "module",
